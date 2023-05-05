@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>REST API Example</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			margin-bottom: 1rem;
+			font-size: 1rem;
+			font-weight: 400;
+			line-height: 1.5;
+			color: #212529;
+			text-align: left;
+		}
+
+		th,
+		td {
+			padding: 0.75rem;
+			vertical-align: top;
+			border-top: 1px solid #dee2e6;
+		}
+
+		th {
+			font-weight: bold;
+			border-bottom: 2px solid #dee2e6;
+		}
+
+		tbody tr:nth-of-type(even) {
+			background-color: #f8f9fa;
+		}
+	</style>
+</head>
+<body>
+	<h1>REST API Example</h1>
+	<table id="data">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Host</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+
+	<script>
+		// Make an HTTP request to the API endpoint
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', 'https://example.com/api/systems', true);
+
+		xhr.onload = function() {
+			// Parse the response as JSON
+			var data = JSON.parse(this.responseText);
+
+			// Display the data on the page
+			var tableBody = document.querySelector('#data tbody');
+			data.forEach(function(system) {
+				var row = tableBody.insertRow();
+				var nameCell = row.insertCell();
+				var hostCell = row.insertCell();
+				nameCell.textContent = system.name;
+				hostCell.textContent = system.host;
+			});
+		};
+
+		xhr.send();
+	</script>
+</body>
+</html>
